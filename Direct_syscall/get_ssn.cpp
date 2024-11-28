@@ -6,6 +6,15 @@ DWORD wNtWriteVirtualMemory;
 DWORD wNtCreateThreadEx;
 DWORD wNtWaitForSingleObject;
 
+/*  테스트 환경에서의 함수 구성
+4C:8BD1                  | mov r10,rcx
+B8 31000000              | mov eax,[syscallNumber]
+F60425 0803FE7F 01       | test byte ptr ds:[7FFE0308],1
+75 03                    | jne ntdll.7FF94AABD125
+0F05                     | syscall
+C3                       | ret
+*/
+
 const char* patterns[38] = {
     "NtCreateFile", "NtOpenFile", "NtReadFile", "NtWriteFile", "NtDeleteFile",
     "NtQueryInformationFile", "NtSetInformationFile",
@@ -49,11 +58,15 @@ unsigned char GetSyscallNumber(const char* functionName) {
         return 0;
     }
     unsigned char* instruction = (unsigned char*)func;
-    
 
-    if (instruction[3] == 0xB8) { // x86-64: mov eax, imm32
-        return instruction[4]; // syscall_number
+    size_t instructionCount = sizeof(instruction) / sizeof(instruction[0]);
+    
+    for (size_t i = 0; i < instructionCount; i++) {
+        if (instruction[i] == 0xB8) { // x86-64: mov eax, imm32
+            return instruction[i + 1]; // syscall_number
+        }
     }
+    
     return 0; // syscall_number가 확인되지 않음
 }
 

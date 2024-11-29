@@ -5,6 +5,10 @@ DWORD wNtAllocateVirtualMemory;
 DWORD wNtWriteVirtualMemory;
 DWORD wNtCreateThreadEx;
 DWORD wNtWaitForSingleObject;
+DWORD wNtCreateFile;
+DWORD wNtWriteFile;
+DWORD wNtDeleteFile;
+
 
 /*  테스트 환경에서의 함수 구성
 4C:8BD1                  | mov r10,rcx
@@ -97,6 +101,12 @@ void get_ssn() {
             wNtWriteVirtualMemory = syscallNumber;
         } else if (functionName == "NtCreateThreadEx") {
             wNtCreateThreadEx = syscallNumber;
+        } else if (functionName == "NtCreateFile") {
+            wNtCreateFile = syscallNumber;
+        } else if (functionName == "NtWriteFile") {
+            wNtWriteFile = syscallNumber;
+        } else if (functionName == "NtDeleteFile") {
+            wNtDeleteFile = syscallNumber;
         }
     }
 }

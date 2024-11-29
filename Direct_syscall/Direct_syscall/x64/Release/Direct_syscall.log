@@ -1,6 +1,9 @@
-﻿  get_ssn.cpp
+﻿  main.cpp
+C:\Users\ISLAB\source\repos\Direct_syscall\main.cpp(36,20): warning C4101: 'filePath' :참조되지 않은 지역 변수입니다.
+C:\Users\ISLAB\source\repos\Direct_syscall\main.cpp(84,20): warning C4101: 'filePath' :참조되지 않은 지역 변수입니다.
+C:\Users\ISLAB\source\repos\Direct_syscall\main.cpp(142,20): warning C4101: 'filePath' :참조되지 않은 지역 변수입니다.
   코드를 생성하고 있습니다.
-  3 of 6 functions (50.0%) were compiled, the rest were copied from previous compilation.
+  2 of 17 functions (11.8%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.

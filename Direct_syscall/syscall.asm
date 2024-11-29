@@ -1,7 +1,10 @@
 EXTERN wNtAllocateVirtualMemory:DWORD               
 EXTERN wNtWriteVirtualMemory:DWORD                  
 EXTERN wNtCreateThreadEx:DWORD                      
-EXTERN wNtWaitForSingleObject:DWORD                 
+EXTERN wNtWaitForSingleObject:DWORD               
+EXTERN wNtCreateFile:DWORD
+EXTERN wNtWriteFile:DWORD
+EXTERN wNtDeleteFile:DWORD
 
 .CODE  ; Start the code section
 
@@ -39,5 +42,29 @@ NtWaitForSingleObject PROC
     syscall
     ret
 NtWaitForSingleObject ENDP
+
+; Similar procedures for NtCreateFile syscalls
+NtCreateFile PROC
+    mov r10, rcx
+    mov eax, wNtCreateFile
+    syscall
+    ret
+NtCreateFile ENDP
+
+; Similar procedures for NtWriteFile syscalls
+NtWriteFile PROC
+    mov r10, rcx
+    mov eax, wNtWriteFile
+    syscall
+    ret
+NtWriteFile ENDP
+
+; Similar procedures for NtDeleteFile syscalls
+NtDeleteFile PROC
+    mov r10, rcx
+    mov eax, wNtDeleteFile
+    syscall
+    ret
+NtDeleteFile ENDP
 
 END  ; End of the module
